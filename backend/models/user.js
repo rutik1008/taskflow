@@ -1,17 +1,24 @@
 import mongoose from 'mongoose';
+import validator from 'email-validator';
 
 const userSchema =new mongoose.Schema({
     name:{
-        type:string,
+        type:String,
         required:true
     },
     email:{
-        type:string ,
+        type:String ,
         required:true,
-        unique:true
+        unique:true,
+        validate:{
+            validator:function(v){
+                return validator.validate(v);
+            },
+            message:"Please enter a valid email"
+        }
     },
     password:{
-        type:string,
+        type:String,
         required:true
     }
 },{
